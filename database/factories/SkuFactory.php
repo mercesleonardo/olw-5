@@ -20,7 +20,7 @@ class SkuFactory extends Factory
         return [
             'product_id' => Product::factory(),
             'name' => fake()->word(),
-            'price' => fake()->randomFloat(2, 10, 10000),
+            'price' => fake()->randomFloat(2, 10, 1000),
             'quantity' => fake()->randomDigit()
         ];
     }
