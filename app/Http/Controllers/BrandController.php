@@ -6,8 +6,6 @@ use App\Http\Requests\BrandStoreRequest;
 use App\Http\Requests\BrandUpdateRequest;
 use App\Models\Brand;
 use App\Services\BrandServices;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class BrandController extends Controller
@@ -18,7 +16,7 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
         Gate::authorize('viewAny', Brand::class);
         $brands = $this->brandServices->list();
@@ -29,7 +27,7 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BrandStoreRequest $request): JsonResponse
+    public function store(BrandStoreRequest $request)
     {
         Gate::authorize('create', Brand::class);
         $brand = $this->brandServices->store($request);
@@ -40,7 +38,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand): JsonResponse
+    public function show(Brand $brand)
     {
         Gate::authorize('view', $brand);
         return response()->json($brand);
@@ -49,7 +47,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BrandUpdateRequest $request, Brand $brand): JsonResponse
+    public function update(BrandUpdateRequest $request, Brand $brand)
     {
         Gate::authorize('update', $brand);
         $brand = $this->brandServices->update($request, $brand);
@@ -59,7 +57,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand): JsonResponse
+    public function destroy(Brand $brand)
     {
         Gate::authorize('delete', $brand);
         $this->brandServices->destroy($brand);

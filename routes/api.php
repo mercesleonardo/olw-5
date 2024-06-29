@@ -16,4 +16,13 @@ Route::apiResource('categories', CategoryController::class)->middleware('auth:sa
 
 Route::apiResource('products', ProductController::class)->middleware('auth:sanctum');
 
+Route::controller(\App\Http\Controllers\FrontController::class)->prefix('frontend')->group(function () {
+    Route::get('buildmenu', 'buildMenu');
+    Route::get('/home', 'home');
+    Route::get('/products', 'products');
+    Route::get('/productAssessories', 'productAssessories');
+    Route::get('/product/{product}', 'product');
+    Route::get('/product', 'static');
+});
+
 require __DIR__.'/auth.php';

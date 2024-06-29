@@ -6,7 +6,6 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use App\Services\ProductServices;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,7 +17,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
         Gate::authorize('viewAny', Product::class);
         $products = $this->productServices->list();
@@ -29,7 +28,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductStoreRequest $request): JsonResponse
+    public function store(ProductStoreRequest $request)
     {
         Gate::authorize('create', Product::class);
         $product = $this->productServices->store($request);
@@ -40,7 +39,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product): JsonResponse
+    public function show(Product $product)
     {
         Gate::authorize('view', $product);
         return response()->json($product);
@@ -49,7 +48,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductUpdateRequest $request, Product $product): JsonResponse
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         Gate::authorize('update', $product);
         $product = $this->productServices->update($request, $product);
@@ -59,7 +58,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product): JsonResponse
+    public function destroy(Product $product)
     {
         Gate::authorize('delete', $product);
         $this->productServices->destroy($product);
